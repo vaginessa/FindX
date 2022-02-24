@@ -48,15 +48,6 @@
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/signInButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Sign in"
-            android:background="@drawable/signinbutton"
-            android:layout_marginTop="15dp"
-            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,11 +57,23 @@
             android:layout_gravity="right"
             android:layout_marginTop="10dp"/>
 
+        <Button
+            android:id="@+id/signInButton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Sign in"
+            android:background="@drawable/signinbutton"
+            android:layout_marginTop="15dp"
+            />
+
+
         <TextView
             android:id="@+id/registerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="right"
             android:layout_marginTop="20dp"
             android:text="Don't have an account? Sign up here!"
             android:textSize="18sp"
