@@ -6,6 +6,8 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from .models import *
 import jwt, datetime
+from datetime import date, datetime,timedelta
+
 
 
 
@@ -29,7 +31,7 @@ class LoginView(APIView):
         
         payload={
             'id':user.id,
-            'exp':datetime.datetime.utcnow + datetime.timedelta(hours=12),
+            'exp':datetime.datetime + datetime.timedelta(minutes=60),
             'iat':datetime.datetime.utcnow()
         }
         
@@ -40,7 +42,30 @@ class LoginView(APIView):
                 'jwt':token
             }
         return response 
+    
+    
+class Userview(APIView):
+        def get(self,request):
+            token=request.COOKIES.get('jwt')
+            if not token:
+                raise AuthenticationFailed('unauthenticated')
+            try:
+                payload=jwt.decode(token,'secret',algorithm=['HS256'])
+            except jwt.ExpiredSignatureError:
+                raise AuthenticationFailed('unauthenticated')
+            user=User.objects.filter(id=payload['id']).first()
+            serializer=UserSerializer(user)
+            return Response(serializer.data)
         
         
         
+class LogoutView(APIView):
+    def post(self,request):
+        response=Response()
+        response.delete_cookie('jwt')
+        response.data={
+            'message':'success'
+            
+        }   
         
+        return response 
