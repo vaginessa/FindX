@@ -32,12 +32,15 @@ class LoginView(APIView):
             'exp':datetime.datetime.utcnow + datetime.timedelta(hours=12),
             'iat':datetime.datetime.utcnow()
         }
+        
         token=jwt.encode(payload,'secret',algorithm='HS256').decode('utf-8')
-        return Response(
-            {
+        response=Response()
+        response.set_cookie(key='jwt',value=token,httponly=True)
+        response.data=  {
                 'jwt':token
             }
-        )
+        return response 
+        
         
         
         
