@@ -1,7 +1,8 @@
 
 from django.urls import path,include
+from .views import RegisterView
 
 urlpatterns = [
    
-    path('register/',include('findxApp.urls'))
+    path('register/',RegisterView.as_view())
 ]
